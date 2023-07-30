@@ -1,6 +1,9 @@
+@charset "UTF-8";
 body, html {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  font-family: 微軟正黑體;
 }
 
 .roomContainer {
@@ -15,21 +18,115 @@ body, html {
 .roomContainer .room {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  background-color: #00A0E9;
 }
 .roomContainer .room .roomTitle {
   width: 100%;
-  height: 100px;
-  background-color: #333;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.roomContainer .room .roomTitle .roomTitleBody {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.roomContainer .room .roomTitle .roomTitleBody .idEl {
+  display: flex;
+  align-items: center;
+}
+.roomContainer .room .roomTitle .roomTitleBody .idEl #namer {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+.roomContainer .room .roomTitle .roomTitleBody .closeButton, .roomContainer .room .roomTitle .roomTitleBody .prevPage {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.roomContainer .room .roomTitle .roomTitleBody .closeButton:hover, .roomContainer .room .roomTitle .roomTitleBody .prevPage:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.roomContainer .room .roomTitle .roomTitleBody .fa-solid {
+  font-size: 20px;
+  color: #fff;
 }
 .roomContainer .room .roomBody {
   width: 100%;
+  height: calc(100% - 120px);
+}
+.roomContainer .room .roomBody .roomBodyText {
+  box-sizing: border-box;
+  width: 100%;
   height: 100%;
-  background-color: #00A0E9;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0px;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox .words {
+  display: flex;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: calc(50% - 20px);
+  word-break: break-all;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox .words.mine {
+  background-color: #62bc71;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox.mine {
+  display: flex;
+  justify-content: flex-end;
 }
 .roomContainer .room .roomChat {
   width: 100%;
-  height: 100px;
-  background-color: #333;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.roomContainer .room .roomChat .roomChatBody {
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+  padding: 0px 0px 0px 10px;
+  width: 100%;
+}
+.roomContainer .room .roomChat .roomChatBody #typeArea {
+  padding: 0px 10px;
+  width: 90%;
+  border-radius: 20px;
+  background-color: #eee;
+  border: none;
+  font-size: 16px;
+}
+.roomContainer .room .roomChat .roomChatBody #typeArea:focus-visible {
+  outline: none;
+}
+.roomContainer .room .roomChat .roomChatBody #sendArea {
+  width: 10%;
+  background-color: unset;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.roomContainer .room .roomChat .roomChatBody #sendArea:hover {
+  color: #777;
 }

@@ -1,7 +1,11 @@
-
+*
+    // outline: solid 1px #000
+    
 body,html
     width: 100%
     height: 100%
+    overflow-x: hidden
+    font-family: 微軟正黑體
 
 .roomContainer
     margin: auto
@@ -14,17 +18,96 @@ body,html
     & .room
         width: 100%
         height: 100%
-        display: flex
-        flex-direction: column
+        background-color: #00A0E9
         & .roomTitle
             width: 100%
-            height: 100px
-            background-color: #333
+            height: 70px
+            display: flex
+            justify-content: center
+            align-items: center
+            & .roomTitleBody
+                width: 90%
+                display: flex
+                justify-content: space-between
+                & .idEl
+                    display: flex
+                    align-items: center
+                    & #namer
+                        margin-left: 10px
+                        font-size: 16px
+                        color: #fff
+                        font-weight: bold
+                & .closeButton,.prevPage
+                    width: 50px
+                    height: 50px
+                    border-radius: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    cursor: pointer
+                    transition: 0.3s
+                & .closeButton:hover,.prevPage:hover
+                    background-color: rgba(255,255 ,255 ,0.3)
+                & .fa-solid
+                    font-size: 20px
+                    color: #fff
         & .roomBody
             width: 100%
-            height: 100%
-            background-color: #00A0E9
+            height: calc( 100% - 120px )
+            & .roomBodyText
+                box-sizing: border-box
+                width: 100%
+                height: 100%
+                padding: 10px 20px
+                display: flex
+                flex-direction: column
+                justify-content: flex-end
+                & .textBox
+                    display: flex
+                    justify-content: flex-start
+                    align-items: center
+                    margin: 10px 0px
+                    & .words 
+                        display: flex
+                        background-color: #fff
+                        padding: 10px
+                        border-radius: 10px
+                        max-width: calc( 50% - 20px )
+                        word-break: break-all
+                    & .words.mine 
+                        background-color: #62bc71
+                & .textBox.mine
+                    display: flex
+                    justify-content: flex-end
         & .roomChat
             width: 100%
-            height: 100px
-            background-color: #333
+            height: 50px
+            background-color: #fff
+            display: flex
+            align-items: center
+            justify-content: flex-end
+            & .roomChatBody
+                display: flex
+                justify-content: space-around
+                height: 30px
+                padding: 0px 0px 0px 10px 
+                width: 100%
+                & #typeArea
+                    padding: 0px 10px
+                    width: 90%
+                    border-radius: 20px
+                    background-color: #eee
+                    border: none
+                    font-size: 16px
+                & #typeArea:focus-visible
+                    outline: none
+                & #sendArea
+                    width: 10%
+                    background-color: unset
+                    border: none
+                    font-size: 16px
+                    cursor: pointer
+                    transition: 0.3s
+                & #sendArea:hover
+                    color: #777
+
