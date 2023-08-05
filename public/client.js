@@ -26,6 +26,7 @@ function textCreate(message, isMine) {
     p.innerText = message;
     div.appendChild(p);
     roomBodyText.appendChild(div);
+    typeArea.value = '';
 }
 
 typeArea.addEventListener('keydown', (event) => {
@@ -36,7 +37,6 @@ typeArea.addEventListener('keydown', (event) => {
 // 監聽 'message' 事件
 socket.on('message', (data) => {
     // console.log('收到訊息：', data);
-    console.log(data === typeArea.value);
     if (data !== typeArea.value) {
       textCreate(data, false);
       typeArea.value = '';
