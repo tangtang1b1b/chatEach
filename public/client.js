@@ -33,14 +33,26 @@ function textCreate(message, isMine) {
     typeArea.value = '';
 }
 
+let updatetext = true;
+let endtext = false;
+typeArea.addEventListener('compositionupdate',() => {
+    updatetext = true;
+    endtext = false;
+    console.log('輸入中');
+})
+typeArea.addEventListener('compositionend',() => {
+    updatetext = false;
+    endtext = true;
+    console.log('好');
+})
 typeArea.addEventListener('keydown', (event) => {
-    if(event.key !== 'Enter') return;
+    if(event.key !== 'Enter' || !endtext || updatetext) return;
     send();
 });
 sendArea.addEventListener('click',() => {
-  send();
+    send();
 });
-
+    
 // 監聽 'message' 事件
 socket.on('message', (message) => {
     // console.log('收到訊息：', data);

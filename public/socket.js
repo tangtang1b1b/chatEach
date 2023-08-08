@@ -27,5 +27,5 @@ io.on('connection', (socket) => {
 // 啟動伺服器
 const port = 3000;
 server.listen(port, () => {
-  console.log(`伺服器運行在 http://localhost:${port}`);
+  // console.log(`伺服器運行在 http://localhost:${port}`);
 });
