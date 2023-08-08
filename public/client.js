@@ -30,7 +30,9 @@ function textCreate(message, isMine) {
     div.appendChild(p);
     // div.appendChild(pName);
     roomBodyText.appendChild(div);
-    typeArea.value = '';
+    if(message === typeArea.value){
+        typeArea.value = '';
+    }
 }
 
 let updatetext = true;
@@ -38,12 +40,12 @@ let endtext = false;
 typeArea.addEventListener('compositionupdate',() => {
     updatetext = true;
     endtext = false;
-    console.log('輸入中');
+    // console.log('輸入中');
 })
 typeArea.addEventListener('compositionend',() => {
     updatetext = false;
     endtext = true;
-    console.log('好');
+    // console.log('好');
 })
 typeArea.addEventListener('keydown', (event) => {
     if(event.key !== 'Enter' || !endtext || updatetext) return;
@@ -57,7 +59,6 @@ sendArea.addEventListener('click',() => {
 socket.on('message', (message) => {
     // console.log('收到訊息：', data);
     if (message !== typeArea.value) {
-      textCreate(message, false);
-      typeArea.value = '';
+        textCreate(message, false);
     }
 });
