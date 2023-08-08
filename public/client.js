@@ -58,7 +58,9 @@ sendArea.addEventListener('click',() => {
 // 監聽 'message' 事件
 socket.on('message', (message) => {
     // console.log('收到訊息：', data);
+    let roomBody = document.querySelector('.roomBody');
     if (message !== typeArea.value) {
         textCreate(message, false);
+        roomBody.scrollTop = roomBody.scrollHeight;
     }
 });
