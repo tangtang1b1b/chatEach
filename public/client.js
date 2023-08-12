@@ -2,6 +2,7 @@
 const socket = io();
 let sendArea = document.querySelector('#sendArea');
 let typeArea = document.querySelector('#typeArea');
+let minener = false;
 
 function send() {
     if(typeArea.value === '') return;
@@ -13,24 +14,35 @@ function send() {
 }
 
 function textCreate(message, isMine) {
+    const clock = new Date();
+    const Hours = clock.getHours() > 12 ? clock.getHours() % 12 : clock.getHours();
+    const Ampm = clock.getHours() > 12 ? '下午' : '上午';
+    const Minutes = clock.getMinutes().toString().padStart(2,'0');
     let roomBodyText = document.querySelector('.roomBodyText');
     let div = document.createElement('div');
     let p = document.createElement('p');
-    // let pName = document.createElement('p');
+    let pTime = document.createElement('p');
+    let pName = document.createElement('p');
     if(isMine){
         div.className = 'textBox mine';
         p.className = 'words mine';
+        pTime.className = 'currentTime mine';
+        pTime.textContent = `${Ampm} ${Hours}:${Minutes}`;
     } else {
         div.className = 'textBox';
         p.className = 'words';
-        // pName.className = 'userName';
-        // pName.textContent = `${senderId}:`;
+        pName.className = 'userName';
+        pTime.className = 'currentTime';
+        // pName.textContent = `${nameId}`;
+        pTime.textContent = `${Ampm} ${Hours}:${Minutes}`;
     }
     p.innerText = message;
     div.appendChild(p);
     // div.appendChild(pName);
+    div.appendChild(pTime);
     roomBodyText.appendChild(div);
     if(message === typeArea.value){
+        minener = typeArea.value;
         typeArea.value = '';
     }
 }
@@ -56,11 +68,11 @@ sendArea.addEventListener('click',() => {
 });
     
 // 監聽 'message' 事件
-socket.on('message', (message) => {
-    // console.log('收到訊息：', data);
+socket.on('message', (data) => {
+    console.log('收到訊息：', data.message, data.name);
     let roomBody = document.querySelector('.roomBody');
-    if (message !== typeArea.value) {
-        textCreate(message, false);
+    if (data.message !== minener) {
+        textCreate(data.message, false, data.name);
         roomBody.scrollTop = roomBody.scrollHeight;
     }
 });

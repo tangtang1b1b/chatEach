@@ -12,7 +12,6 @@ body,html
     width: 100%
     max-width: 768px
     height: 100%
-    // overflow: hidden
     & .room
         width: 100%
         height: 100%
@@ -65,8 +64,15 @@ body,html
                     position: relative
                     display: flex
                     justify-content: flex-start
-                    align-items: center
+                    align-items: flex-end
                     margin: 10px 0px
+                    & .currentTime
+                        color: #fff
+                        margin-left: 5px
+                        font-size: 12px
+                    & .currentTime.mine
+                        order: -1
+                        margin-right: 5px
                     & .userName
                         position: absolute
                         top: 0
