@@ -18,7 +18,11 @@ io.on('connection', (socket) => {
   socket.on('join', (username) => {
     userName = username;
     console.log(`User ${userName} joined`);
-    
+    socket.broadcast.emit('message', {       
+      type: {
+        join: true,
+      }, name: userName 
+    });
   });
   // 監聽 'message' 事件
   socket.on('message', (data) => {
@@ -29,6 +33,16 @@ io.on('connection', (socket) => {
       name: userName,
       message: data,
     })
+  });
+  socket.on('disconnect', () => {
+    if (userName) {
+        console.log(`${userName} 離開聊天室`);
+        socket.broadcast.emit('message', {       
+          type: {
+            join: false,
+          }, name: userName 
+        });
+    }
   });
 });
 

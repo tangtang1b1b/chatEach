@@ -15,6 +15,7 @@ body, html {
   height: 100%;
   background-color: #f7f7f7;
   transition: 0.3s;
+  z-index: 99;
 }
 #userNameSend .sendContainer {
   display: flex;
@@ -32,12 +33,20 @@ body, html {
   height: 100%;
 }
 #userNameSend #usernameInput {
-  width: 200px;
+  width: 190px;
   height: 30px;
+  font-size: 14px;
   border: none;
-  border-bottom: solid 1px #000;
+  border-radius: 0;
+  border-bottom: solid 1px #333;
   background-color: #f7f7f7;
   color: #000;
+}
+#userNameSend #usernameInput::placeholder {
+  text-align: center;
+}
+#userNameSend #usernameInput:focus-visible {
+  outline: none;
 }
 #userNameSend #joinButton {
   width: 200px;
@@ -45,6 +54,8 @@ body, html {
   border: none;
   background-color: #00A0E9;
   color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -150,6 +161,17 @@ body, html {
 .roomContainer .room .roomBody .roomBodyText .textBox.mine {
   display: flex;
   justify-content: flex-end;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox.addIn {
+  display: flex;
+  justify-content: center;
+}
+.roomContainer .room .roomBody .roomBodyText .textBox.addIn .addInWords {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
 }
 .roomContainer .room .roomChat {
   width: 100%;

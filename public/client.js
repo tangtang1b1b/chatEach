@@ -5,14 +5,28 @@ let typeArea = document.querySelector('#typeArea');
 let userNameSend = document.querySelector('#userNameSend');
 let usernameInput = document.querySelector('#usernameInput');
 let joinButton = document.querySelector('#joinButton');
+let closeButton = document.querySelector('.closeButton');
 let minener = false;
 
+closeButton.addEventListener('click',() => {
+    userNameSend.style.display = 'flex';
+    setTimeout(() => {
+        userNameSend.style.opacity = '1';
+        location.reload();
+    }, 300);
+});
+
+window.addEventListener('beforeunload',() => {
+    socket.disconnect();
+});
+
 joinButton.addEventListener('click', () => {
-    const username = usernameInput.value;
+    let username = usernameInput.value;
     if (username !== '') {
+        usernameInput.value = '';
         userNameSend.style.opacity = '0';
         setTimeout(() => {
-            userNameSend.remove();
+            userNameSend.style.display = 'none';
         }, 300);
         socket.emit('join', username);
     }
@@ -25,6 +39,30 @@ function send() {
     textCreate(message, true);
     roomBody.scrollTop = roomBody.scrollHeight;
     socket.emit('message', message); // 發送訊息到 Socket.io 伺服器
+}
+
+function userJoin(userName){
+    let roomBodyText = document.querySelector('.roomBodyText');
+    let div = document.createElement('div');
+    let pJoin = document.createElement('p');
+
+    div.className = 'textBox addIn';
+    pJoin.className = 'addInWords';
+    pJoin.textContent = `${userName} 加入聊天室`;
+    div.appendChild(pJoin);
+    roomBodyText.appendChild(div);
+}
+
+function userLeave(userName){
+    let roomBodyText = document.querySelector('.roomBodyText');
+    let div = document.createElement('div');
+    let pJoin = document.createElement('p');
+
+    div.className = 'textBox addIn';
+    pJoin.className = 'addInWords';
+    pJoin.textContent = `${userName} 離開聊天室`;
+    div.appendChild(pJoin);
+    roomBodyText.appendChild(div);
 }
 
 function textCreate(message, isMine, userName) {
@@ -86,7 +124,15 @@ socket.on('message', (data) => {
     console.log('收到訊息：', data);
     let roomBody = document.querySelector('.roomBody');
     if (data.message !== minener) {
-        textCreate(data.message, false, data.name);
+        if(data.type){
+            if(data.type.join){
+                userJoin(data.name);
+            }else{
+                userLeave(data.name);
+            }
+        }else{
+            textCreate(data.message, false, data.name);
+        }
         roomBody.scrollTop = roomBody.scrollHeight;
     }
 });
