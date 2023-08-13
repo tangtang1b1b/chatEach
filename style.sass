@@ -6,7 +6,41 @@ body,html
     height: 100%
     overflow-x: hidden
     font-family: 微軟正黑體
-
+#userNameSend
+    position: fixed
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    height: 100%
+    background-color: #f7f7f7
+    transition: 0.3s
+    & .sendContainer
+        display: flex
+        align-items: center
+        justify-content: space-around
+        flex-direction: column
+        height: 300px
+    & .titleImg
+        width: 150px
+        height: 150px
+        & img
+            width: 100%
+            height: 100%
+    & #usernameInput
+        width: 200px
+        height: 30px
+        border: none
+        border-bottom: solid 1px #000
+        background-color: #f7f7f7
+        color: #000
+    & #joinButton
+        width: 200px
+        height: 40px
+        border: none
+        background-color: #00A0E9
+        color: #fff
+        cursor: pointer
 .roomContainer
     margin: auto
     width: 100%

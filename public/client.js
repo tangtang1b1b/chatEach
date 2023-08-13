@@ -2,7 +2,21 @@
 const socket = io();
 let sendArea = document.querySelector('#sendArea');
 let typeArea = document.querySelector('#typeArea');
+let userNameSend = document.querySelector('#userNameSend');
+let usernameInput = document.querySelector('#usernameInput');
+let joinButton = document.querySelector('#joinButton');
 let minener = false;
+
+joinButton.addEventListener('click', () => {
+    const username = usernameInput.value;
+    if (username !== '') {
+        userNameSend.style.opacity = '0';
+        setTimeout(() => {
+            userNameSend.remove();
+        }, 300);
+        socket.emit('join', username);
+    }
+});
 
 function send() {
     if(typeArea.value === '') return;
@@ -13,7 +27,7 @@ function send() {
     socket.emit('message', message); // 發送訊息到 Socket.io 伺服器
 }
 
-function textCreate(message, isMine) {
+function textCreate(message, isMine, userName) {
     const clock = new Date();
     const Hours = clock.getHours() > 12 ? clock.getHours() % 12 : clock.getHours();
     const Ampm = clock.getHours() > 12 ? '下午' : '上午';
@@ -33,12 +47,12 @@ function textCreate(message, isMine) {
         p.className = 'words';
         pName.className = 'userName';
         pTime.className = 'currentTime';
-        // pName.textContent = `${nameId}`;
+        pName.textContent = `${userName}`;
         pTime.textContent = `${Ampm} ${Hours}:${Minutes}`;
     }
     p.innerText = message;
     div.appendChild(p);
-    // div.appendChild(pName);
+    div.appendChild(pName);
     div.appendChild(pTime);
     roomBodyText.appendChild(div);
     if(message === typeArea.value){
@@ -69,7 +83,7 @@ sendArea.addEventListener('click',() => {
     
 // 監聽 'message' 事件
 socket.on('message', (data) => {
-    console.log('收到訊息：', data.message, data.name);
+    console.log('收到訊息：', data);
     let roomBody = document.querySelector('.roomBody');
     if (data.message !== minener) {
         textCreate(data.message, false, data.name);
