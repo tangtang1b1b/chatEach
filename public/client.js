@@ -99,17 +99,17 @@ function textCreate(message, isMine, userName) {
     }
 }
 
-let updatetext = true;
-let endtext = false;
+let updatetext = false;
+let endtext = true;
 typeArea.addEventListener('compositionupdate',() => {
     updatetext = true;
     endtext = false;
-    // console.log('輸入中');
+    console.log('輸入中');
 })
 typeArea.addEventListener('compositionend',() => {
     updatetext = false;
     endtext = true;
-    // console.log('好');
+    console.log('好');
 })
 typeArea.addEventListener('keydown', (event) => {
     if(event.key !== 'Enter' || !endtext || updatetext) return;
